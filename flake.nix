@@ -3,11 +3,10 @@
 
   outputs = { self }: {
     templates = {
-      rust-bin = {
-        path = ./rust-bin;
+      rust.bin = {
+        path = ./rust/bin;
         description = "Rust bin template, using Naersk";
       };
-    };
 
   };
 }
