@@ -3,11 +3,11 @@ exec_prefix = @exec_prefix@
 bindir = @bindir@
 
 hello: hello.c
-	$(CC) -Wall -O3 -o hello hello.c
+	$(CC) -Wall -O3 -o MYNAME hello.c
 
 clean:
-	rm -f hello
+	rm -f MYNAME
 
 install: hello
 	install -d $(bindir)
-	install -t $(bindir) hello
+	install -t $(bindir) MYNAME

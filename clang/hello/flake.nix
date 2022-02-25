@@ -1,8 +1,8 @@
 {
-  description = "An over-engineered Hello World in C";
+  description = "Basic Setup C setup";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-21.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     utils.url =
       "github:numtide/flake-utils?rev=3cecb5b042f7f209c56ffd8371b2711a290ec797";
     flake-compat = {
@@ -19,7 +19,7 @@
       let
         inherit (inputs.utils.lib) flattenTree mkApp;
         inherit (pkgs.stdenv) mkDerivation;
-        name = "hello";
+        name = "MYNAME";
         src = ./.;
         overlays = [ inputs.devshell.overlay ];
         pkgs = import nixpkgs { inherit system overlays; };
@@ -30,7 +30,7 @@
         };
         checkscript = ''
           echo 'running some integration tests'
-          [[ $(hello) = 'Hello Nixers!' ]]
+          [[ $(MYNAME) = 'Hello Nixers!' ]]
         '';
       in with pkgs; {
         defaultPackage = mkDerivation ({ inherit name src version; } // common);
@@ -58,7 +58,7 @@
             installPhase = "mkdir -p $out";
           };
         };
-        # │ error: attribute 'hello' missing
+        # │ error: attribute 'MYNAME' missing
         # // lib.optionalAttrs stdenv.isLinux {
         #   # A VM test of the NixOS module.
         #   vmTest = with import (nixpkgs + "/nixos/lib/testing-python.nix") { inherit system; };
@@ -67,7 +67,7 @@
         #       testScript = ''
         #         start_all()
         #         client.wait_for_unit("multi-user.target")
-        #         client.succeed("hello")
+        #         client.succeed("MYNAME")
         #       '';
         #     };
         # };
