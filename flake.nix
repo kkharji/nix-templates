@@ -8,5 +8,10 @@
         description = "Rust bin template, using Naersk";
       };
 
+      clang.hello = {
+        path = ./clang/hello;
+        description = "An over-engineered Hello World in C";
+      };
+
   };
 }
