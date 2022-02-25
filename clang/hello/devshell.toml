@@ -29,12 +29,6 @@ help = "run nix build"
 category = "Main"
 command = "nix build $@"
 
-[[commands]]
-name = "watch"
-help = "Startin cargo watch and do nix build"
-category = "Main"
-command = "cargo watch --clear --why --postpone --delay 5 --watch src --shell 'nix build'"
-
 # Check-in with nix-flake-check
 # FIXME: overlay does not take an argument named 'final'
 [git.hooks.pre-commit]

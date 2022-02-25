@@ -21,8 +21,8 @@
         inherit (pkgs.stdenv) mkDerivation;
         name = "hello";
         src = ./.;
-        overlay = [ inputs.devshell ];
-        pkgs = import nixpkgs { inherit system overlay; };
+        overlays = [ inputs.devshell.overlay ];
+        pkgs = import nixpkgs { inherit system overlays; };
         version = builtins.substring 0 8 self.lastModifiedDate;
         common = {
           buildInputs = [ ];
@@ -34,6 +34,11 @@
         '';
       in with pkgs; {
         defaultPackage = mkDerivation ({ inherit name src version; } // common);
+        devShell = devshell.mkShell {
+          imports = [ (devshell.importTOML ./devshell.toml) ];
+          packages = common.buildInputs ++ common.nativeBuildInputs;
+          env = [ ];
+        };
         packages = flattenTree { ${name} = self.defaultPackage.${system}; };
         defaultApp = mkApp { drv = self.defaultPackage.${system}; };
         nixosModules = flattenTree {
