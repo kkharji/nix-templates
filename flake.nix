@@ -8,11 +8,15 @@
         description = "Rust bin template, using Naersk";
       };
 
+      rust.mlua = {
+        path = ./rust/mlua;
+        description = "Rust mlua template, using nix-cargo-integration";
+      };
+
       clang.hello = {
         path = ./clang/hello;
         description = "An over-engineered Hello World in C";
       };
-
 
       nixos.container = {
         path = ./nixos/container;
