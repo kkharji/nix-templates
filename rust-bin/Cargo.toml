@@ -1,0 +1,13 @@
+[package]
+name = "MYNAME"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/tami5/MYNAME"
+readme = "README.md"
+description = "What does it do"
+keywords = [ ]
+
+[dependencies]
+anyhow = "1.0.42"
+clap = { version = "3.1.2", features = ["derive"] }

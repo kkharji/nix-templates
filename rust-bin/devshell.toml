@@ -1,0 +1,50 @@
+imports = [ "git.hooks" ]
+
+[devshell]
+name = "MYNAME-dev-shell"
+
+# packages = [ "cargo-watch" ]
+[git.hooks]
+enable = true
+
+[[commands]]
+package = "git-cliff"
+help = "Changelog generator"
+
+[[commands]]
+name = "run"
+help = "run main bin"
+category = "Main"
+command = "./result/bin/MYNAME $@"
+
+[[commands]]
+name = "brun"
+help = "build and run main bin"
+category = "Main"
+command = "nix build && ./result/bin/MYNAME $@"
+
+[[commands]]
+name = "build"
+help = "run nix build"
+category = "Main"
+command = "nix build $@"
+
+[[commands]]
+name = "watch"
+help = "Startin cargo watch and do nix build"
+category = "Main"
+command = "cargo watch --clear --why --postpone --delay 5 --watch src --shell 'nix build'"
+
+# Check-in with nix-flake-check
+# FIXME: overlay does not take an argument named 'final'
+[git.hooks.pre-commit]
+text = """
+# nix flake check"
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [[ $BRANCH == "^master$" ]]; then
+  OUTPUT_FILE=CHANGELOG.md
+  CONFIG_FILE=./.github/workflows/cliff.toml
+  git-cliff -o $OUTPUT_FILE -c $CONFIG_FILE --with-commit "$COMMIT_MSG"
+  git add $OUTPUT_FILE
+fi
+"""
