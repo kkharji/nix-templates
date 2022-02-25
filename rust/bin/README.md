@@ -24,7 +24,7 @@ cargo install --git https://github.com/tami5/MYNAME
   output = { self, ... }@inputs {
     /// ......
     {
-      nixpkgs.overlays = [ inputs.MYNAME.overlay ];
+      nixpkgs.overlays = [ (_: _: inputs.MYNAME.packages) ];
     };
   };
 }

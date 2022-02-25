@@ -127,8 +127,6 @@
           copyTarget = false;
         };
         packages = flattenTree { mnsend = self.defaultPackage."${system}"; };
-        overlay = f: p: { mnsend = self.defaultPackage."${system}"; };
         defaultApp = mkApp { drv = self.defaultPackage."${system}"; };
-
       });
 }
