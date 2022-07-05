@@ -10,7 +10,7 @@ MYNAME
 ### Cargo
 
 ```bash
-cargo install --git https://github.com/tami5/MYNAME
+cargo install --git https://github.com/kkharji/MYNAME
 ```
 
 ### Flakes
@@ -18,7 +18,7 @@ cargo install --git https://github.com/tami5/MYNAME
 ```nix
 {
   inputs = {
-    MYNAME.url = "github:tami5/MYNAME";
+    MYNAME.url = "github:kkharji/MYNAME";
     MYNAME.inputs.nixpkgs.follows = "nixpkgs";
   };
   output = { self, ... }@inputs {
@@ -36,7 +36,7 @@ cargo install --git https://github.com/tami5/MYNAME
 {
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/tami5/MYNAME/archive/master.tar.gz;
+      url = https://github.com/kkharji/MYNAME/archive/master.tar.gz;
     }))
   ];
 }
